@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "123608722099",
+    "project_id": "androidprivatemessenger",
+    "storage_bucket": "androidprivatemessenger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123608722099:android:27b6efefb872b89cba5ec6",
+        "android_client_info": {
+          "package_name": "com.ldhcjs.androidprivatemessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123608722099-fq15q0jcb6rpl8av7lsdcg2k41c4nt3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ldhcjs.androidprivatemessenger",
+            "certificate_hash": "c39386197e2fad10c8e3f0417eea1e860464e9dc"
+          }
+        },
+        {
+          "client_id": "123608722099-v4o1gjumldb968udol8nub1rpd2uvv38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6Bg5ZyuJdSClgVvErnEqNt8rLZoolKhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123608722099-v4o1gjumldb968udol8nub1rpd2uvv38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
