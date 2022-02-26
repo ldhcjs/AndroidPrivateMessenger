@@ -16,7 +16,7 @@ interface RetrofitInterface {
 //        "Authorization: key=AAAAHMenarM:APA91bGI0pqsVLM_6M3hK6BXGiUE2QBBHvEkBkW-ZA-tU_COZyGv8Cj9y8W403QclEO5eGJfKIC4ZphLeUsCzAk01tro3xBwI6ofi8uWMMhXw7RP3JmVNJQkIQu1fowrXtqWGo44wIDa"
 //    )
     @POST("fcm/send")
-    fun postRawJson(
-        @HeaderMap headerMap: Map<String, String>, @Body body: JSONObject
+    fun sendMsg(
+        @HeaderMap headerMap: Map<String, String>, @Body body: FirebaseMessageObject
     ): Single<ReceivedMsg>
 }

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 class ReceivedMsg {
     @SerializedName("multicast_id")
     @Expose
-    private var multicastId: Int? = null
+    private var multicastId: Long? = null
 
     @SerializedName("success")
     @Expose
@@ -24,11 +24,11 @@ class ReceivedMsg {
     @Expose
     private var results: List<Result?>? = null
 
-    fun getMulticastId(): Int? {
+    fun getMulticastId(): Long? {
         return multicastId
     }
 
-    fun setMulticastId(multicastId: Int?) {
+    fun setMulticastId(multicastId: Long?) {
         this.multicastId = multicastId
     }
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -70,49 +71,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-
-        val datas = JsonArray()
-        val jsonObjects = JsonObject()
-        jsonObjects.addProperty("title", "TEST")
-        jsonObjects.addProperty("body", "BODY TEST")
-        datas.add(jsonObjects)
-        val req = JsonObject()
-        req.addProperty(
-            "to",
-            "cTtdUU9QQdCq1CkhtdrBsZ:APA91bFUqtvcHPpRu8OiHyfNmJse-zMAy2gZJtGwpqFbak6qBV8wOUt-IDJ9MFqTs8Cl88CTZYfOW-DbKfV6L0fdWmApoBlsI4gyLBSvc_CQS-zYA7dV4EEkgCHy68eVgLiRUlqVop95"
-        )
-        req.addProperty("data", Gson().toJson(jsonObjects))
-
-        val send = JSONObject()
-        val data = JSONObject()
-        send.put(
-            "to",
-            "cTtdUU9QQdCq1CkhtdrBsZ:APA91bFUqtvcHPpRu8OiHyfNmJse-zMAy2gZJtGwpqFbak6qBV8wOUt-IDJ9MFqTs8Cl88CTZYfOW-DbKfV6L0fdWmApoBlsI4gyLBSvc_CQS-zYA7dV4EEkgCHy68eVgLiRUlqVop95"
-        )
-        data.put("title", "TEST")
-        data.put("body", "BODY TEST")
-        send.put("data", data)
-        Log.d(tag, send.toString())
-
-        val header = HashMap<String, String>()
-        header["Accept"] = "application/json"
-        header["Content-Type"] = "application/json"
-        header["Authorization"] = "key=AAAAHMenarM:APA91bGI0pqsVLM_6M3hK6BXGiUE2QBBHvEkBkW-ZA-tU_COZyGv8Cj9y8W403QclEO5eGJfKIC4ZphLeUsCzAk01tro3xBwI6ofi8uWMMhXw7RP3JmVNJQkIQu1fowrXtqWGo44wIDa"
-
-        val okHttpClient = OKHttpManager.getIntance()
-        okHttpClient.postRawJson(header, send)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .unsubscribeOn(Schedulers.io())
-            .subscribe(
-                { result ->
-                    Log.d(tag, "result.size : ${result.getSuccess()}")
-
-                },
-                { error -> Log.d(tag, "Error : ${error.localizedMessage}") }
-            )
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -124,6 +82,37 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun onClickPush(v:View) {
+        val header = HashMap<String, String>()
+        header["Accept"] = "application/json"
+        header["Content-Type"] = "application/json"
+        header["Authorization"] = "key=AAAAHMenarM:APA91bGI0pqsVLM_6M3hK6BXGiUE2QBBHvEkBkW-ZA-tU_COZyGv8Cj9y8W403QclEO5eGJfKIC4ZphLeUsCzAk01tro3xBwI6ofi8uWMMhXw7RP3JmVNJQkIQu1fowrXtqWGo44wIDa"
+
+        val firebaseMessageObject = FirebaseMessageObject()
+        val firebaseMessageData = FirebaseMessageData()
+        firebaseMessageData.setTitle("Push Msg")
+        firebaseMessageData.setBody("This msg is for testing")
+        // pixel 3a
+//        firebaseMessageObject.setTo("cTtdUU9QQdCq1CkhtdrBsZ:APA91bFUqtvcHPpRu8OiHyfNmJse-zMAy2gZJtGwpqFbak6qBV8wOUt-IDJ9MFqTs8Cl88CTZYfOW-DbKfV6L0fdWmApoBlsI4gyLBSvc_CQS-zYA7dV4EEkgCHy68eVgLiRUlqVop95")
+        // pixel 2
+        firebaseMessageObject.setTo("fVUID8jCQnaG_B1Y-RaEjZ:APA91bGt-trVNpr8apkhIPB01yuW6RwQqF2UwXws6lbsG2vz3kzKB-wr9Fwc5IXVfK7ZiMwbzi56Mx0KiQbG8cDRE_Kr_-1G3MjsP1T1eS_RA_EmDZWVW0yYb5Wv0cSS12BVzWOUfMu0")
+        firebaseMessageObject.setData(firebaseMessageData)
+
+        val okHttpClient = OKHttpManager.getIntance()
+        okHttpClient.sendMsg(header, firebaseMessageObject)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .unsubscribeOn(Schedulers.io())
+            .subscribe(
+                { result ->
+                    Log.d(tag, "result.size : ${result.getSuccess()}")
+
+                },
+                { error -> Log.d(tag, "Error : ${error.localizedMessage}") }
+            )
     }
 
 }
