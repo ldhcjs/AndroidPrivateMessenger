@@ -1,6 +1,5 @@
 package com.ldhcjs.androidprivatemessenger
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,10 +9,11 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-class MyFirebaseMessagingService: FirebaseMessagingService() {
+class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private val tag = MyFirebaseMessagingService::class.java.simpleName
 
@@ -30,33 +30,44 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
         sendNotification(p0.data["body"].toString())
         super.onMessageReceived(p0)
     }
+
     private fun sendNotification(messageBody: String) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-            PendingIntent.FLAG_ONE_SHOT)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0 /* Request code */, intent,
+            PendingIntent.FLAG_ONE_SHOT
+        )
 
-        val channelId = getString(R.string.default_web_client_id)
+        val channelName = getString(R.string.channel_name)
+        val channelId = getString(R.string.channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.ic_chat_noti)
             .setContentTitle(getString(R.string.app_name))
             .setContentText(messageBody)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
-            .setPriority(Notification.PRI)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId,
-                "Channel human readable title",
-                NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel.description = "Msg Push"
             notificationManager.createNotificationChannel(channel)
         }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
+        with(NotificationManagerCompat.from(this)) {
+            notify(Integer.parseInt(channelId), notificationBuilder.build())
+        }
+//        notificationManager.notify(Integer.parseInt(channelId), notificationBuilder.build())
     }
 }

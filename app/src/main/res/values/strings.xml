@@ -11,4 +11,6 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="msg_token_fmt">FCM Token : %s</string>
+    <string name="channel_name">APM PUSH MSG</string>
+    <string name="channel_id">1000</string>
 </resources>
