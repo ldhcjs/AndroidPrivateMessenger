@@ -4,19 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ldhcjs.androidprivatemessenger.R
-import com.ldhcjs.androidprivatemessenger.databinding.ItemGalleryBinding
+import com.ldhcjs.androidprivatemessenger.databinding.ItemChatBinding
 
 class ChatAdpater(private val dataSet: Array<String>) :
     RecyclerView.Adapter<ChatAdpater.BindingViewHolder>() {
 
-    class BindingViewHolder(val binding: ItemGalleryBinding) :
+    class BindingViewHolder(val binding: ItemChatBinding) :
         RecyclerView.ViewHolder(binding.root)
-    //binding의 타입은 item ItemGalleryBinding 이유는 리사이클러뷰에 각각 하나씩 들어가는 itemlayout의 이름이 item_gallery 이기 때문.
+    //binding의 타입은 item ItemChatBinding 이유는 리사이클러뷰에 각각 하나씩 들어가는 itemlayout의 이름이 item_gallery 이기 때문.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_gallery, parent, false)
-        return BindingViewHolder(ItemGalleryBinding.bind(view))
+            .inflate(R.layout.item_chat, parent, false)
+        return BindingViewHolder(ItemChatBinding.bind(view))
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {

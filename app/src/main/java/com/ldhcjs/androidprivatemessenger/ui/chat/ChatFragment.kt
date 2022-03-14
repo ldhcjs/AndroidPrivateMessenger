@@ -1,28 +1,33 @@
-package com.ldhcjs.androidprivatemessenger.ui.gallery
+package com.ldhcjs.androidprivatemessenger.ui.chat
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ldhcjs.androidprivatemessenger.adapter.ChatAdpater
-import com.ldhcjs.androidprivatemessenger.databinding.FragmentGalleryBinding
+import com.ldhcjs.androidprivatemessenger.databinding.FragmentChatBinding
 
-class GalleryFragment : Fragment() {
+class ChatFragment : Fragment() {
 
-    private lateinit var binding: FragmentGalleryBinding
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var binding: FragmentChatBinding
+    private val chatViewModel: ChatViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGalleryBinding.inflate(layoutInflater)
+        binding = FragmentChatBinding.inflate(layoutInflater)
         binding.rvChat.layoutManager = LinearLayoutManager(context)
         val array = arrayOf("aaa", "bbb", "ccc")
         binding.rvChat.adapter = ChatAdpater(array)
+        chatViewModel.rvChatText.observe(viewLifecycleOwner, Observer {
+            binding.rvChat.adapter = ChatAdpater(it)
+        })
 
         /*
         galleryViewModel =

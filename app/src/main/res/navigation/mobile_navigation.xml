@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.ldhcjs.androidprivatemessenger.ui.gallery.GalleryFragment"
+        android:name="com.ldhcjs.androidprivatemessenger.ui.chat.ChatFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_chat" />
 
     <fragment
         android:id="@+id/nav_slideshow"
