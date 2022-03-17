@@ -10,6 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ldhcjs.androidprivatemessenger.adapter.ChatAdpater
 import com.ldhcjs.androidprivatemessenger.databinding.FragmentChatBinding
+import com.ldhcjs.androidprivatemessenger.db.ChatDatabase
+import com.ldhcjs.androidprivatemessenger.db.entity.ChatEntity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ChatFragment : Fragment() {
 
@@ -24,11 +29,21 @@ class ChatFragment : Fragment() {
         binding = FragmentChatBinding.inflate(layoutInflater)
         binding.rvChat.layoutManager = LinearLayoutManager(context)
         val array = arrayOf("aaa", "bbb", "ccc")
-        binding.rvChat.adapter = ChatAdpater(array)
+        val arr = ArrayList<ChatEntity>()
+        arr.add(ChatEntity("name","title","content","profile"))
+        binding.rvChat.adapter = ChatAdpater(arr)
         chatViewModel.rvChatText.observe(viewLifecycleOwner, Observer {
             binding.rvChat.adapter = ChatAdpater(it)
         })
 
+        // Room + Singleton + Coroutine
+        // 채팅 데이터 추가
+        var newChat = ChatEntity("name","title","content","profile")
+        val db = ChatDatabase.getInstance(context)
+        // 비동기 동작 코루틴 동작
+        CoroutineScope(Dispatchers.IO).launch {
+            db!!.chatDao().insert(newChat)
+        }
         /*
         galleryViewModel =
                 ViewModelProvider(this).get(GalleryViewModel::class.java)

@@ -3,6 +3,7 @@ package com.ldhcjs.androidprivatemessenger.ui.chat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ldhcjs.androidprivatemessenger.db.entity.ChatEntity
 
 class ChatViewModel : ViewModel() {
 
@@ -10,9 +11,9 @@ class ChatViewModel : ViewModel() {
         value = "This is chat Fragment"
     }
 
-    private val _rvChatText = MutableLiveData<Array<String>>().apply {
-        value = arrayOf("Init data1", "Init data2", "Init data3")
+    private val _rvChatText = MutableLiveData<MutableList<ChatEntity>>().apply {
+        value = mutableListOf(ChatEntity("name","title","content","profile"))
     }
     val text: LiveData<String> = _text
-    val rvChatText: LiveData<Array<String>> = _rvChatText
+    val rvChatText: LiveData<MutableList<ChatEntity>> = _rvChatText
 }

@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "com.ldhcjs.androidprivatemessenger"
         minSdkVersion 23
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -40,6 +40,7 @@ android {
 
 dependencies {
 
+    // Room
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
 

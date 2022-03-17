@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ldhcjs.androidprivatemessenger.R
 import com.ldhcjs.androidprivatemessenger.databinding.ItemChatBinding
+import com.ldhcjs.androidprivatemessenger.db.entity.ChatEntity
 
-class ChatAdpater(private val dataSet: Array<String>) :
+class ChatAdpater(private val dataSet: MutableList<ChatEntity>) :
     RecyclerView.Adapter<ChatAdpater.BindingViewHolder>() {
 
     class BindingViewHolder(val binding: ItemChatBinding) :
@@ -20,7 +21,7 @@ class ChatAdpater(private val dataSet: Array<String>) :
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
-        holder.binding.tvTitle.text = dataSet[position]
+        holder.binding.tvTitle.text = dataSet[position].name
     }
 
     override fun getItemCount(): Int {
