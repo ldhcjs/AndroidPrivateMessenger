@@ -38,11 +38,11 @@ class ChatFragment : Fragment() {
 
         // Room + Singleton + Coroutine
         // 채팅 데이터 추가
-        var newChat = ChatEntity("name","title","content","profile")
+        var chatData = ChatEntity("name","title","content","profile")
         val db = ChatDatabase.getInstance(context)
         // 비동기 동작 코루틴 동작
         CoroutineScope(Dispatchers.IO).launch {
-            db!!.chatDao().insert(newChat)
+            db!!.chatDao().insert(chatData)
         }
         /*
         galleryViewModel =
