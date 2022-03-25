@@ -3,12 +3,13 @@ package com.ldhcjs.androidprivatemessenger.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.inject.Deferred
 import com.ldhcjs.androidprivatemessenger.R
 import com.ldhcjs.androidprivatemessenger.databinding.ItemChatBinding
 import com.ldhcjs.androidprivatemessenger.db.entity.ChatEntity
 
-class ChatAdpater(private val dataSet: MutableList<ChatEntity>) :
-    RecyclerView.Adapter<ChatAdpater.BindingViewHolder>() {
+class ChatAdapter(private val dataSet: MutableList<ChatEntity>) :
+    RecyclerView.Adapter<ChatAdapter.BindingViewHolder>() {
 
     class BindingViewHolder(val binding: ItemChatBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -21,7 +22,7 @@ class ChatAdpater(private val dataSet: MutableList<ChatEntity>) :
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
-        holder.binding.tvTitle.text = dataSet[position].name
+        holder.binding.tvTitle.text = dataSet[position].msg
     }
 
     override fun getItemCount(): Int {

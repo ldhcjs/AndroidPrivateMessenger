@@ -5,6 +5,9 @@ import com.ldhcjs.androidprivatemessenger.db.entity.ChatEntity
 
 @Dao
 interface ChatDao {
+    @Query("SELECT * FROM ChatEntity")
+    fun selectAllChat(): MutableList<ChatEntity>
+
     @Insert
     fun insert(chatEntity: ChatEntity)
 

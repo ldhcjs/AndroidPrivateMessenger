@@ -14,6 +14,11 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.ldhcjs.androidprivatemessenger.MainActivity
 import com.ldhcjs.androidprivatemessenger.R
+import com.ldhcjs.androidprivatemessenger.db.ChatDatabase
+import com.ldhcjs.androidprivatemessenger.db.entity.ChatEntity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -31,6 +36,19 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.d(tag, "Received msg: " + rm.data)
         sendNotification(rm.data["msg"].toString())
         super.onMessageReceived(rm)
+
+        val chatData = ChatEntity(
+            rm.data["title"].toString(),
+            rm.data["msg"].toString(),
+            rm.data["name"].toString(),
+            rm.data["time"].toString()
+        )
+        val db = ChatDatabase.getInstance(applicationContext)
+        // 비동기 동작 코루틴 동작
+        CoroutineScope(Dispatchers.IO).launch {
+            db!!.chatDao().insert(chatData)
+//            Log.d(tag, "fcm chatlist " + db.chatDao().selectAllChat())
+        }
     }
 
     private fun sendNotification(messageBody: String) {

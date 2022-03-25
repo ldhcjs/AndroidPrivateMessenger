@@ -22,6 +22,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.*
 import com.ldhcjs.androidprivatemessenger.fcm.FirebaseCloudMsgManager
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class MainActivity : AppCompatActivity() {
@@ -88,7 +90,9 @@ class MainActivity : AppCompatActivity() {
     fun onClickPush(v: View) {
         val hashMap: HashMap<String, String> = HashMap<String, String>()
         hashMap[FirebaseCloudMsgManager.TITLE] = "test title"
-        hashMap[FirebaseCloudMsgManager.MSG] = "test body"
+        hashMap[FirebaseCloudMsgManager.MSG] = "test msg"
+        hashMap[FirebaseCloudMsgManager.NAME] = "test msg"
+        hashMap[FirebaseCloudMsgManager.TIME] = "20220325_123020"
         hashMap[FirebaseCloudMsgManager.TOKEN] = FirebaseCloudMsgManager.tmp_token
 
         FirebaseCloudMsgManager.sendFcmObj(FirebaseCloudMsgManager.getFcmObj(hashMap))
