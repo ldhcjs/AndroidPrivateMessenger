@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     fun onClickPush(v: View) {
         val hashMap: HashMap<String, String> = HashMap<String, String>()
         hashMap[FirebaseCloudMsgManager.TITLE] = "test title"
-        hashMap[FirebaseCloudMsgManager.BODY] = "test body"
+        hashMap[FirebaseCloudMsgManager.MSG] = "test body"
         hashMap[FirebaseCloudMsgManager.TOKEN] = FirebaseCloudMsgManager.tmp_token
 
         FirebaseCloudMsgManager.sendFcmObj(FirebaseCloudMsgManager.getFcmObj(hashMap))

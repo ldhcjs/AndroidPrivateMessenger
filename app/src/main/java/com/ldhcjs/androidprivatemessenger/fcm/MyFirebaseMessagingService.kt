@@ -27,10 +27,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // FCM registration token to your app server.
     }
 
-    override fun onMessageReceived(p0: RemoteMessage) {
-        Log.d(tag, "Received msg: " + p0.data)
-        sendNotification(p0.data["body"].toString())
-        super.onMessageReceived(p0)
+    override fun onMessageReceived(rm: RemoteMessage) {
+        Log.d(tag, "Received msg: " + rm.data)
+        sendNotification(rm.data["msg"].toString())
+        super.onMessageReceived(rm)
     }
 
     private fun sendNotification(messageBody: String) {

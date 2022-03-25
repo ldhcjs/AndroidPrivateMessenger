@@ -13,6 +13,6 @@ interface RetrofitInterface {
 //    )
     @POST("fcm/send")
     fun sendMsg(
-        @HeaderMap headerMap: Map<String, String>, @Body body: FirebaseMessageObject
+        @HeaderMap headerMap: Map<String, String>, @Body body: FirebaseMsgObject
     ): Single<ReceivedMsg>
 }

@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class ChatEntity(
-    val name: String,
     val title: String,
-    val content: String,
-    val profile: String
+    val msg: String,
+    val name: String,
+    val time: String
     ) {
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }
