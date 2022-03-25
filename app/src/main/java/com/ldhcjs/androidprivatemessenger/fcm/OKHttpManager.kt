@@ -1,4 +1,4 @@
-package com.ldhcjs.androidprivatemessenger
+package com.ldhcjs.androidprivatemessenger.fcm
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

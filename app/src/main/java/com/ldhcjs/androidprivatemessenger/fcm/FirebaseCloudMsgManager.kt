@@ -1,4 +1,4 @@
-package com.ldhcjs.androidprivatemessenger
+package com.ldhcjs.androidprivatemessenger.fcm
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -38,10 +38,8 @@ object FirebaseCloudMsgManager {
     fun sendFcmObj(fcmObj: FirebaseMessageObject) {
         val okHttpClient = OKHttpManager.getIntance()
         okHttpClient.sendMsg(header, fcmObj)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .unsubscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io()) // subscribe 연산에 사용되는 Thread
+            .observeOn(AndroidSchedulers.mainThread()) // subscribe 연산 종료 후 mainThread로 돌려줌
             .subscribe(
                 { result ->
                     Log.d(TAG, "result.size : ${result.getSuccess()}")

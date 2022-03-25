@@ -1,4 +1,4 @@
-package com.ldhcjs.androidprivatemessenger
+package com.ldhcjs.androidprivatemessenger.fcm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,6 +12,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.ldhcjs.androidprivatemessenger.MainActivity
+import com.ldhcjs.androidprivatemessenger.R
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 

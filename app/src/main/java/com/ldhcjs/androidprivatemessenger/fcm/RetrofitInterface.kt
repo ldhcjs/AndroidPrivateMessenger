@@ -1,10 +1,6 @@
-package com.ldhcjs.androidprivatemessenger
+package com.ldhcjs.androidprivatemessenger.fcm
 
-import com.google.gson.Gson
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
 import io.reactivex.Single
-import org.json.JSONObject
 import retrofit2.http.*
 
 interface RetrofitInterface {
