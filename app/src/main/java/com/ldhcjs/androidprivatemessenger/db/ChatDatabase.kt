@@ -20,7 +20,7 @@ abstract class ChatDatabase : RoomDatabase() {
             if (instance == null) {
                 synchronized(ChatDatabase::class) {
                     instance = Room.databaseBuilder(
-                        context!!.applicationContext,
+                        context!!,
                         ChatDatabase::class.java,
                         "chat_database"
                     ).build()

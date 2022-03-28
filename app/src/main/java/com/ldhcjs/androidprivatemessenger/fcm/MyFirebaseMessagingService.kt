@@ -34,7 +34,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(rm: RemoteMessage) {
         Log.d(tag, "Received msg: " + rm.data)
-        sendNotification(rm.data["msg"].toString())
+        sendNotification(rm.data["time"].toString())
         super.onMessageReceived(rm)
 
         val chatData = ChatEntity(

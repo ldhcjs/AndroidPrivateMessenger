@@ -22,11 +22,17 @@ class ChatAdapter(private val dataSet: MutableList<ChatEntity>) :
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
-        holder.binding.tvTitle.text = dataSet[position].msg
+        holder.binding.tvTime.text = dataSet[position].time
+        holder.binding.tvTitle.text = dataSet[position].title
+        holder.binding.tvMsg.text = dataSet[position].msg
     }
 
     override fun getItemCount(): Int {
         return dataSet.size
+    }
+
+    fun addRecentChat(recentChat: ChatEntity) {
+        dataSet.add(0, recentChat)
     }
 /*
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

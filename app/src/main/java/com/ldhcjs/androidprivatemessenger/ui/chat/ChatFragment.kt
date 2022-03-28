@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ldhcjs.androidprivatemessenger.adapter.ChatAdapter
@@ -21,7 +23,7 @@ class ChatFragment : Fragment() {
     private lateinit var binding: FragmentChatBinding
     private val chatViewModel: ChatViewModel by viewModels()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-    private val db = ChatDatabase.getInstance(context)
+    private lateinit var db: ChatDatabase
     private lateinit var chatAdapter: ChatAdapter
 
     override fun onCreateView(
@@ -29,15 +31,25 @@ class ChatFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
+        db = ChatDatabase.getInstance(context)!!
+        chatAdapter = ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time")))
+
         binding = FragmentChatBinding.inflate(layoutInflater)
         binding.rvChat.layoutManager = LinearLayoutManager(context)
 
         chatViewModel.rvChatText.observe(viewLifecycleOwner, Observer {
             coroutineScope.launch {
-                binding.rvChat.adapter = ChatAdapter(performQueryAsync())
+                chatAdapter = ChatAdapter(performQueryAsync())
+                binding.rvChat.adapter = chatAdapter
             }
         })
-        // TODO 푸시 메시지를 서비스에서 받고 채팅창에 실시간 업데이트 가능하도록 이벤트 보내야 함
+
+        // TODO 푸시 메시지 받아 DB에 실시간 추가 부분까지 완료. 역순으로 레이아웃하는 부분 필요
+        db.chatDao().selectAllChatAsync().observe(this, Observer {
+            chatAdapter.addRecentChat(it[it.size - 1])
+            chatAdapter.notifyItemInserted(0)
+        })
 
         return binding.root
     }
@@ -45,6 +57,12 @@ class ChatFragment : Fragment() {
     private suspend fun performQueryAsync(): MutableList<ChatEntity> =
         withContext(Dispatchers.IO) {
             Log.d(tag, "performQueryAsync chatlist mutableList")
-            return@withContext db!!.chatDao().selectAllChat()
+            return@withContext db.chatDao().selectAllChat()
+        }
+
+    private suspend fun performQueryAsync1(): LiveData<MutableList<ChatEntity>> =
+        withContext(Dispatchers.IO) {
+            Log.d(tag, "performQueryAsync1 chatlist mutableList")
+            return@withContext db.chatDao().selectAllChatAsync()
         }
 }
