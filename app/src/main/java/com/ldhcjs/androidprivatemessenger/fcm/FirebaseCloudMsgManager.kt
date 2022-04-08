@@ -56,7 +56,7 @@ object FirebaseCloudMsgManager {
             .subscribe(
                 { result ->
                     Log.d(TAG, "result.size : ${result.getSuccess()}")
-
+                    Log.d(TAG, "result.size : ${result.getResults()}")
                 },
                 { error -> Log.d(TAG, "Error : ${error.localizedMessage}") }
             )

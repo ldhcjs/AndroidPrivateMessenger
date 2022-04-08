@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ldhcjs.androidprivatemessenger.adapter.ChatAdapter
@@ -48,7 +47,8 @@ class ChatFragment : Fragment() {
         // TODO 푸시 메시지 받아 DB에 실시간 추가 부분까지 완료. 역순으로 레이아웃하는 부분 필요
         db.chatDao().selectAllChatAsync().observe(this, Observer {
             chatAdapter.addRecentChat(it[it.size - 1])
-            chatAdapter.notifyItemInserted(0)
+            chatAdapter.notifyItemInserted(chatAdapter.itemCount - 1)
+            binding.rvChat.scrollToPosition(chatAdapter.itemCount - 1)
         })
 
         return binding.root
