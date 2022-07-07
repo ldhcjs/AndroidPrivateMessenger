@@ -22,4 +22,74 @@
     <style name="Theme.AndroidPrivateMessenger.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.AndroidPrivateMessenger.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.AndroidPrivateMessenger.Light" parent="Theme.MaterialComponents">
+
+        <!-- Original AppCompat attributes. -->
+        <item name="colorPrimary">@color/design_default_color_primary</item>
+        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="colorSecondary">@color/design_default_color_secondary</item>
+        <item name="android:colorBackground">@color/design_default_color_background</item>
+        <item name="colorError">@color/design_default_color_error</item>
+
+        <!-- MaterialComponents attributes (needed if parent="Theme.AppCompat"). -->
+        <item name="colorPrimaryVariant">@color/design_default_color_primary_variant</item>
+        <item name="colorSecondaryVariant">@color/design_default_color_secondary_variant</item>
+        <item name="colorSurface">@color/design_default_color_surface</item>
+        <item name="colorOnPrimary">@color/design_default_color_on_primary</item>
+        <item name="colorOnSecondary">@color/design_default_color_on_secondary</item>
+        <item name="colorOnBackground">@color/design_default_color_background</item>
+        <item name="colorOnError">@color/m3_sys_color_light_on_error</item>
+        <item name="colorOnSurface">@color/material_dynamic_neutral10</item>
+        <item name="scrimBackground">@color/design_default_color_background</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
+
+        <!-- Material3 attributes (needed if parent="Theme.MaterialComponents"). -->
+        <item name="colorPrimaryInverse">@color/m3_dynamic_default_color_primary_text</item>
+        <item name="colorPrimaryContainer">@color/material_dynamic_primary90</item>
+        <item name="colorOnPrimaryContainer">@color/material_dynamic_primary10</item>
+        <item name="colorSecondaryContainer">@color/material_dynamic_secondary90</item>
+        <item name="colorOnSecondaryContainer">@color/material_dynamic_secondary10</item>
+        <item name="colorTertiary">@color/material_dynamic_tertiary40</item>
+        <item name="colorOnTertiary">@color/material_dynamic_tertiary100</item>
+        <item name="colorTertiaryContainer">@color/material_dynamic_tertiary90</item>
+        <item name="colorOnTertiaryContainer">@color/material_dynamic_tertiary10</item>
+        <item name="colorSurfaceVariant">@color/material_dynamic_neutral_variant10</item>
+        <item name="colorOnSurfaceVariant">@color/material_dynamic_neutral_variant30</item>
+        <item name="colorSurfaceInverse">@color/m3_sys_color_dynamic_light_inverse_surface</item>
+        <item name="colorOnSurfaceInverse">@color/m3_sys_color_dynamic_light_inverse_on_surface</item>
+        <item name="colorOutline">@color/material_dynamic_neutral_variant50</item>
+        <item name="colorErrorContainer">@color/m3_sys_color_light_error_container</item>
+        <item name="colorOnErrorContainer">@color/m3_sys_color_dark_on_error_container</item>
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.Material3.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.Material3.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.Material3.DisplaySmall</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Material3.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Material3.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Material3.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Material3.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.Material3.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.Material3.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Material3.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Material3.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Material3.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Material3.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Material3.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.Material3.LabelSmall</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Material3.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Material3.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Material3.LargeComponent</item>
+    </style>
 </resources>
