@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ldhcjs.androidprivatemessenger.adapter.ChatAdapter
 import com.ldhcjs.androidprivatemessenger.databinding.FragmentChatBinding
@@ -20,7 +22,7 @@ class ChatFragment : Fragment() {
 
     //    private val tag: String = ChatFragment::class.java.simpleName
     private lateinit var binding: FragmentChatBinding
-    private val chatViewModel: ChatViewModel by viewModels()
+    private lateinit var chatViewModel: ChatViewModel
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private lateinit var db: ChatDatabase
     private lateinit var chatAdapter: ChatAdapter
@@ -30,7 +32,7 @@ class ChatFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-
+        chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
         db = ChatDatabase.getInstance(context)!!
         chatAdapter = ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time")))
 
