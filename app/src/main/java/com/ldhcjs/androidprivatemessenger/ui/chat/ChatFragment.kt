@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ldhcjs.androidprivatemessenger.adapter.ChatAdapter
 import com.ldhcjs.androidprivatemessenger.databinding.FragmentChatBinding
@@ -48,9 +46,11 @@ class ChatFragment : Fragment() {
 
         // TODO 푸시 메시지 받아 DB에 실시간 추가 부분까지 완료. 역순으로 레이아웃하는 부분 필요
         db.chatDao().selectAllChatAsync().observe(this, Observer {
-            chatAdapter.addRecentChat(it[it.size - 1])
-            chatAdapter.notifyItemInserted(chatAdapter.itemCount - 1)
-            binding.rvChat.scrollToPosition(chatAdapter.itemCount - 1)
+            if(it.size > 0) {
+                chatAdapter.addRecentChat(it[it.size - 1])
+                chatAdapter.notifyItemInserted(chatAdapter.itemCount - 1)
+                binding.rvChat.scrollToPosition(chatAdapter.itemCount - 1)
+            }
         })
 
         return binding.root
