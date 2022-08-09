@@ -5,11 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.textfield.TextInputLayout
+import com.ldhcjs.androidprivatemessenger.R
 import com.ldhcjs.androidprivatemessenger.adapter.ChatAdapter
 import com.ldhcjs.androidprivatemessenger.databinding.FragmentChatBinding
 import com.ldhcjs.androidprivatemessenger.db.ChatDatabase
@@ -24,6 +27,7 @@ class ChatFragment : Fragment() {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private lateinit var db: ChatDatabase
     private lateinit var chatAdapter: ChatAdapter
+    private lateinit var til_chat: TextInputLayout
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -33,6 +37,11 @@ class ChatFragment : Fragment() {
         chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
         db = ChatDatabase.getInstance(context)!!
         chatAdapter = ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time")))
+        til_chat = container!!.findViewById(R.id.til_chat)
+
+        til_chat.setStartIconOnClickListener {
+            Toast.makeText(this, "ICON", Toast.LENGTH_SHORT)
+        }
 
         binding = FragmentChatBinding.inflate(layoutInflater)
         binding.rvChat.layoutManager = LinearLayoutManager(context)

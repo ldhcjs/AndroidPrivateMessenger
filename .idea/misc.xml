@@ -8,7 +8,7 @@
         <entry key="..\:/AndroidProjects/AndroidPrivateMessenger/app/src/main/res/layout/content_main.xml" value="0.365625" />
         <entry key="..\:/Morpheus/workspace/AndroidPrivateMessenger/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.36203703703703705" />
         <entry key="..\:/Morpheus/workspace/AndroidPrivateMessenger/app/src/main/res/drawable/ic_speech_bubble_svgrepo_com.xml" value="0.22083333333333333" />
-        <entry key="..\:/Morpheus/workspace/AndroidPrivateMessenger/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/Morpheus/workspace/AndroidPrivateMessenger/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Morpheus/workspace/AndroidPrivateMessenger/app/src/main/res/layout/app_bar_main.xml" value="0.3619791666666667" />
         <entry key="..\:/Morpheus/workspace/AndroidPrivateMessenger/app/src/main/res/layout/content_main.xml" value="0.3619791666666667" />
         <entry key="..\:/Morpheus/workspace/AndroidPrivateMessenger/app/src/main/res/layout/fragment_chat.xml" value="0.33" />
@@ -22,7 +22,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
