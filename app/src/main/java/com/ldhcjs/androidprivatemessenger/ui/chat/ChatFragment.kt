@@ -27,20 +27,20 @@ class ChatFragment : Fragment() {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private lateinit var db: ChatDatabase
     private lateinit var chatAdapter: ChatAdapter
-    private lateinit var til_chat: TextInputLayout
+    private lateinit var tilChat: TextInputLayout
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
+        chatViewModel = ViewModelProvider(this)[ChatViewModel::class.java]
         db = ChatDatabase.getInstance(context)!!
         chatAdapter = ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time")))
-        til_chat = container!!.findViewById(R.id.til_chat)
+        tilChat = container!!.findViewById(R.id.til_chat)
 
-        til_chat.setStartIconOnClickListener {
-            Toast.makeText(this, "ICON", Toast.LENGTH_SHORT)
+        tilChat.setStartIconOnClickListener {
+            Toast.makeText(context, "ICON", Toast.LENGTH_SHORT).show()
         }
 
         binding = FragmentChatBinding.inflate(layoutInflater)
@@ -54,7 +54,7 @@ class ChatFragment : Fragment() {
         })
 
         // TODO 푸시 메시지 받아 DB에 실시간 추가 부분까지 완료. 역순으로 레이아웃하는 부분 필요
-        db.chatDao().selectAllChatAsync().observe(this, Observer {
+        db.chatDao().selectAllChatAsync().observe(viewLifecycleOwner, Observer {
             if(it.size > 0) {
                 chatAdapter.addRecentChat(it[it.size - 1])
                 chatAdapter.notifyItemInserted(chatAdapter.itemCount - 1)

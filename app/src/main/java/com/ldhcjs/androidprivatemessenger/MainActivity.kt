@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.*
 import com.ldhcjs.androidprivatemessenger.fcm.FirebaseCloudMsgManager
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         val button: Button = findViewById(R.id.button)
+
+        FirebaseApp.initializeApp(applicationContext)
+
         FirebaseCloudMsgManager.init()
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
