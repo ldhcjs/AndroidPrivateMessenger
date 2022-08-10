@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val button: Button = findViewById(R.id.button)
 
-        FirebaseApp.initializeApp(applicationContext)
+        //FirebaseApp.initializeApp(applicationContext)
 
         FirebaseCloudMsgManager.init()
 
