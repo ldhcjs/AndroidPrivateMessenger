@@ -1,6 +1,7 @@
 package com.ldhcjs.androidprivatemessenger.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.inject.Deferred
@@ -22,8 +23,19 @@ class ChatAdapter(private val dataSet: MutableList<ChatEntity>) :
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
-        holder.binding.tvTimeRcv.text = dataSet[position].time
-        holder.binding.tvMsgRcv.text = dataSet[position].msg
+        if(dataSet[position].who == "me") {
+            holder.binding.clReceiver.visibility = View.GONE
+            holder.binding.clSender.visibility = View.VISIBLE
+            holder.binding.tvTimeSender.text = dataSet[position].time
+            holder.binding.tvMsgSender.text = dataSet[position].msg
+        } else {
+            holder.binding.clSender.visibility = View.GONE
+            holder.binding.clReceiver.visibility = View.VISIBLE
+            holder.binding.tvTimeRcv.text = dataSet[position].time
+            holder.binding.tvMsgRcv.text = dataSet[position].msg
+        }
+
+
         //holder.binding.tvMsg.text = dataSet[position].msg
     }
 

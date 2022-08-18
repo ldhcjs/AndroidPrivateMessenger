@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/text_gallery"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,19 +29,33 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_chat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_chat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:startIconDrawable="@android:drawable/ic_input_add"
         android:hint="대화를 입력하세요"
+        android:paddingEnd="48dp"
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_chat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="56dp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ib_send"
+        android:layout_width="48dp"
+        android:layout_height="56dp"
+        android:background="#E0E0E0"
+        android:visibility="visible"
+        android:src="@drawable/ic_baseline_send_24"
+        android:scaleType="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/til_chat"
+        app:layout_constraintBottom_toBottomOf="@id/til_chat"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,8 +14,8 @@ object FirebaseCloudMsgManager {
     val MSG: String = "msg"
     val NAME: String = "name"
     val TIME: String = "time"
-    val WHO: String = "time"
-    val GROUP: String = "time"
+    val WHO: String = "who"
+    val GROUP: String = "group"
 
     private val header = HashMap<String, String>()
 

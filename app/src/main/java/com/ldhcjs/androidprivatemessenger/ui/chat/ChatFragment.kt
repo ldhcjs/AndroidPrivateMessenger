@@ -13,10 +13,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputLayout
 import com.ldhcjs.androidprivatemessenger.R
+import com.ldhcjs.androidprivatemessenger.Util
 import com.ldhcjs.androidprivatemessenger.adapter.ChatAdapter
 import com.ldhcjs.androidprivatemessenger.databinding.FragmentChatBinding
 import com.ldhcjs.androidprivatemessenger.db.ChatDatabase
 import com.ldhcjs.androidprivatemessenger.db.entity.ChatEntity
+import com.ldhcjs.androidprivatemessenger.fcm.FirebaseCloudMsgManager
 import kotlinx.coroutines.*
 
 class ChatFragment : Fragment() {
@@ -27,7 +29,6 @@ class ChatFragment : Fragment() {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private lateinit var db: ChatDatabase
     private lateinit var chatAdapter: ChatAdapter
-    private lateinit var tilChat: TextInputLayout
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -35,15 +36,11 @@ class ChatFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         chatViewModel = ViewModelProvider(this)[ChatViewModel::class.java]
-        db = ChatDatabase.getInstance(context)!!
-        chatAdapter = ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time", "who", "group")))
-
-        binding.tilChat.setStartIconOnClickListener {
-            Toast.makeText(context, "ICON", Toast.LENGTH_SHORT).show()
-        }
-
         binding = FragmentChatBinding.inflate(layoutInflater)
         binding.rvChat.layoutManager = LinearLayoutManager(context)
+
+        db = ChatDatabase.getInstance(context)!!
+        chatAdapter = ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time", "who", "group")))
 
         chatViewModel.rvChatText.observe(viewLifecycleOwner, Observer {
             coroutineScope.launch {
@@ -60,6 +57,40 @@ class ChatFragment : Fragment() {
                 binding.rvChat.scrollToPosition(chatAdapter.itemCount - 1)
             }
         })
+
+
+        // TODO 이모지에디트텍스트에서 발송 누르면 실제 메시지 보내지는 과정 수정 필요
+        binding.tilChat.setStartIconOnClickListener {
+            Toast.makeText(context, "ICON", Toast.LENGTH_SHORT).show()
+        }
+        binding.ibSend.setOnClickListener{
+
+            val hashMap: HashMap<String, String> = HashMap<String, String>()
+            hashMap[FirebaseCloudMsgManager.TITLE] = "test title"
+            hashMap[FirebaseCloudMsgManager.MSG] = binding.tieChat.text.toString()
+            hashMap[FirebaseCloudMsgManager.NAME] = "test msg"
+            hashMap[FirebaseCloudMsgManager.TIME] = Util.getCurrentHour()
+            hashMap[FirebaseCloudMsgManager.WHO] = "me"
+            hashMap[FirebaseCloudMsgManager.GROUP] = "none"
+            hashMap[FirebaseCloudMsgManager.TOKEN] = FirebaseCloudMsgManager.tmp_token
+
+            FirebaseCloudMsgManager.sendFcmObj(FirebaseCloudMsgManager.getFcmObj(hashMap))
+
+            val chatData = ChatEntity(
+                hashMap[FirebaseCloudMsgManager.TITLE]!!,
+                hashMap[FirebaseCloudMsgManager.MSG]!!,
+                hashMap[FirebaseCloudMsgManager.NAME]!!,
+                hashMap[FirebaseCloudMsgManager.TIME]!!,
+                hashMap[FirebaseCloudMsgManager.WHO]!!,
+                hashMap[FirebaseCloudMsgManager.GROUP]!!
+            )
+            val db = ChatDatabase.getInstance(context)
+            // 비동기 동작 코루틴 동작
+            CoroutineScope(Dispatchers.IO).launch {
+                db!!.chatDao().insert(chatData)
+//            Log.d(tag, "fcm chatlist " + db.chatDao().selectAllChat())
+            }
+        }
 
         return binding.root
     }

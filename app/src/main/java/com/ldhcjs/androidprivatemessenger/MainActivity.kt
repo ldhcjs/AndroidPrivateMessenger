@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         hashMap[FirebaseCloudMsgManager.TITLE] = "test title"
         hashMap[FirebaseCloudMsgManager.MSG] = "test msg"
         hashMap[FirebaseCloudMsgManager.NAME] = "test msg"
-        hashMap[FirebaseCloudMsgManager.TIME] = Util.getCurrentTime()
+        hashMap[FirebaseCloudMsgManager.TIME] = Util.getCurrentHour()
         hashMap[FirebaseCloudMsgManager.TOKEN] = FirebaseCloudMsgManager.tmp_token
 
         FirebaseCloudMsgManager.sendFcmObj(FirebaseCloudMsgManager.getFcmObj(hashMap))

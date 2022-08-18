@@ -42,7 +42,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             rm.data["msg"].toString(),
             rm.data["name"].toString(),
             rm.data["time"].toString(),
-            rm.data["who"].toString(),
+            //rm.data["who"].toString(),
+            "other",
             rm.data["group"].toString()
         )
         val db = ChatDatabase.getInstance(applicationContext)
