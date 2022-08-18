@@ -22,9 +22,9 @@ class ChatAdapter(private val dataSet: MutableList<ChatEntity>) :
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
-        holder.binding.tvTime.text = dataSet[position].time
-        holder.binding.tvTitle.text = dataSet[position].title
-        holder.binding.tvMsg.text = dataSet[position].msg
+        holder.binding.tvTimeRcv.text = dataSet[position].time
+        holder.binding.tvMsgRcv.text = dataSet[position].msg
+        //holder.binding.tvMsg.text = dataSet[position].msg
     }
 
     override fun getItemCount(): Int {

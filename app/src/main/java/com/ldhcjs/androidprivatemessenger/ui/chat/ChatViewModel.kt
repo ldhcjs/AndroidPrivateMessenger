@@ -12,7 +12,7 @@ class ChatViewModel : ViewModel() {
     }
 
     private val _rvChatText = MutableLiveData<MutableList<ChatEntity>>().apply {
-        value = mutableListOf(ChatEntity("name","title","content","profile"))
+        value = mutableListOf(ChatEntity("title","msg","name","time","who", "group"))
     }
     val text: LiveData<String> = _text
     val rvChatText: LiveData<MutableList<ChatEntity>> = _rvChatText

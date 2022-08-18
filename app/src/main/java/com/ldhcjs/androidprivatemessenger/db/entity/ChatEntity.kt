@@ -8,7 +8,9 @@ data class ChatEntity(
     val title: String,
     val msg: String,
     val name: String,
-    val time: String
+    val time: String,
+    val who: String,
+    val group: String
     ) {
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

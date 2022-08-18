@@ -36,10 +36,9 @@ class ChatFragment : Fragment() {
     ): View? {
         chatViewModel = ViewModelProvider(this)[ChatViewModel::class.java]
         db = ChatDatabase.getInstance(context)!!
-        chatAdapter = ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time")))
-        tilChat = container!!.findViewById(R.id.til_chat)
+        chatAdapter = ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time", "who", "group")))
 
-        tilChat.setStartIconOnClickListener {
+        binding.tilChat.setStartIconOnClickListener {
             Toast.makeText(context, "ICON", Toast.LENGTH_SHORT).show()
         }
 

@@ -41,7 +41,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             rm.data["title"].toString(),
             rm.data["msg"].toString(),
             rm.data["name"].toString(),
-            rm.data["time"].toString()
+            rm.data["time"].toString(),
+            rm.data["who"].toString(),
+            rm.data["group"].toString()
         )
         val db = ChatDatabase.getInstance(applicationContext)
         // 비동기 동작 코루틴 동작
