@@ -7,10 +7,10 @@ import com.ldhcjs.androidprivatemessenger.db.entity.ChatEntity
 
 @Dao
 interface ChatDao {
-    @Query("SELECT * FROM ChatEntity ORDER BY time ASC")
+    @Query("SELECT * FROM ChatEntity ORDER BY id ASC")
     fun selectAllChat(): MutableList<ChatEntity>
 
-    @Query("SELECT * FROM ChatEntity ORDER BY time ASC")
+    @Query("SELECT * FROM ChatEntity ORDER BY id DESC")
     fun selectAllChatAsync(): LiveData<MutableList<ChatEntity>>
 
     @Insert
