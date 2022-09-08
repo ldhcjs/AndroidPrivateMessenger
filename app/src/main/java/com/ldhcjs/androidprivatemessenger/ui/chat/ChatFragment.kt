@@ -11,8 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.textfield.TextInputLayout
-import com.ldhcjs.androidprivatemessenger.R
+import com.ldhcjs.androidprivatemessenger.ApmApplication
 import com.ldhcjs.androidprivatemessenger.Util
 import com.ldhcjs.androidprivatemessenger.adapter.ChatAdapter
 import com.ldhcjs.androidprivatemessenger.databinding.FragmentChatBinding
@@ -39,8 +38,10 @@ class ChatFragment : Fragment() {
         binding = FragmentChatBinding.inflate(layoutInflater)
         binding.rvChat.layoutManager = LinearLayoutManager(context)
 
-        db = ChatDatabase.getInstance(context)!!
-        chatAdapter = ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time", "who", "group")))
+        db = ApmApplication.apmDBInstance
+        // db = ChatDatabase.getInstance(context)!!
+        chatAdapter =
+            ChatAdapter(mutableListOf(ChatEntity("title", "msg", "name", "time", "who", "group")))
 
         chatViewModel.rvChatText.observe(viewLifecycleOwner, Observer {
             coroutineScope.launch {
@@ -50,13 +51,14 @@ class ChatFragment : Fragment() {
         })
 
         // TODO 푸시 메시지 받아 DB에 실시간 추가 부분까지 완료. 역순으로 레이아웃하는 부분 필요
-        db.chatDao().selectAllChatAsync().observe(viewLifecycleOwner, Observer {
-            if(it.size > 0) {
-                chatAdapter.addRecentChat(it[it.size - 1])
-                chatAdapter.notifyItemInserted(chatAdapter.itemCount - 1)
-                binding.rvChat.scrollToPosition(chatAdapter.itemCount - 1)
-            }
-        })
+        ApmApplication.apmDBInstance.chatDao().selectAllChatAsync()
+            .observe(viewLifecycleOwner, Observer {
+                if (it.size > 0) {
+                    chatAdapter.addRecentChat(it[it.size - 1])
+                    chatAdapter.notifyItemInserted(chatAdapter.itemCount - 1)
+                    binding.rvChat.scrollToPosition(chatAdapter.itemCount - 1)
+                }
+            })
 
 
         // TODO 이모지에디트텍스트에서 발송 누르면 실제 메시지 보내지는 과정 수정 필요
@@ -84,10 +86,10 @@ class ChatFragment : Fragment() {
                 hashMap[FirebaseCloudMsgManager.WHO]!!,
                 hashMap[FirebaseCloudMsgManager.GROUP]!!
             )
-            val db = ChatDatabase.getInstance(context)
+            // val db = ChatDatabase.getInstance(context)
             // 비동기 동작 코루틴 동작
             CoroutineScope(Dispatchers.IO).launch {
-                db!!.chatDao().insert(chatData)
+                ApmApplication.apmDBInstance.chatDao().insert(chatData)
 //            Log.d(tag, "fcm chatlist " + db.chatDao().selectAllChat())
             }
         }

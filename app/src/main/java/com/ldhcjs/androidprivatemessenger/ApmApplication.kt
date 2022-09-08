@@ -6,10 +6,18 @@ import androidx.core.provider.FontRequest
 import androidx.emoji.bundled.BundledEmojiCompatConfig
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.text.FontRequestEmojiCompatConfig
+import androidx.room.Room
+import com.ldhcjs.androidprivatemessenger.db.ChatDatabase
 
 class ApmApplication : Application() {
 
     companion object {
+
+        lateinit var apmApplication: ApmApplication
+            private set
+
+        lateinit var apmDBInstance: ChatDatabase
+            private set
 
         private val TAG = "EmojiCompatApplication"
 
@@ -20,6 +28,16 @@ class ApmApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        apmApplication = this
+
+        apmDBInstance = Room.databaseBuilder(
+            apmApplication.applicationContext,
+            ChatDatabase::class.java,
+            "chat_database"
+        ).fallbackToDestructiveMigration() // DB 버전 다른경우 초기화
+            .allowMainThreadQueries() // 메인스레드에서 접근 허용
+            .build()
 
         val config: EmojiCompat.Config
         if (USE_BUNDLED_EMOJI) {

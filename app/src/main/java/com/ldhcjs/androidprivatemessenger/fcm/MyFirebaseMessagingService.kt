@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.ldhcjs.androidprivatemessenger.ApmApplication
 import com.ldhcjs.androidprivatemessenger.MainActivity
 import com.ldhcjs.androidprivatemessenger.R
 import com.ldhcjs.androidprivatemessenger.db.ChatDatabase
@@ -46,10 +47,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             "other",
             rm.data["group"].toString()
         )
-        val db = ChatDatabase.getInstance(applicationContext)
+
+        // val db = ChatDatabase.getInstance(applicationContext)
         // 비동기 동작 코루틴 동작
         CoroutineScope(Dispatchers.IO).launch {
-            db!!.chatDao().insert(chatData)
+            ApmApplication.apmDBInstance.chatDao().insert(chatData)
+            // db!!.chatDao().insert(chatData)
 //            Log.d(tag, "fcm chatlist " + db.chatDao().selectAllChat())
         }
     }

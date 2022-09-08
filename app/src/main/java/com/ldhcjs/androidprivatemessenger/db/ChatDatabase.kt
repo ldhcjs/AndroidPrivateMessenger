@@ -12,21 +12,21 @@ abstract class ChatDatabase : RoomDatabase() {
     abstract fun chatDao(): ChatDao
 
     // Singleton 객체 구현
-    companion object {
-        private var instance: ChatDatabase? = null
-
-        @Synchronized
-        fun getInstance(context: Context?): ChatDatabase? {
-            if (instance == null) {
-                synchronized(ChatDatabase::class) {
-                    instance = Room.databaseBuilder(
-                        context!!,
-                        ChatDatabase::class.java,
-                        "chat_database"
-                    ).build()
-                }
-            }
-            return instance
-        }
-    }
+//    companion object {
+//        private var instance: ChatDatabase? = null
+//
+//        @Synchronized
+//        fun getInstance(context: Context?): ChatDatabase? {
+//            if (instance == null) {
+//                synchronized(ChatDatabase::class) {
+//                    instance = Room.databaseBuilder(
+//                        context!!,
+//                        ChatDatabase::class.java,
+//                        "chat_database"
+//                    ).build()
+//                }
+//            }
+//            return instance
+//        }
+//    }
 }
